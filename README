@@ -1,0 +1,29 @@
+A simple BSD licensed template engine for PHP which leverages the PHP engine's natural speed when dealing with PHP blocks inside HTML etc to perform very quickly.
+
+It will work best with some kind of PHP cache that caches bytecode. I use XCache personally but there are many to choose from http://en.wikipedia.org/wiki/List_of_PHP_accelerators
+
+Still not documented properly (sorry), but it's so simple it doesn't need extensive documentation.
+
+First thing to do is add a template search path. These are stacked up so you can add them on top of each other and it will search through the paths for the file you need, newest first.
+
+template::addPath("/templates/base/");
+template::addPath("/templates/sky/");
+
+Any template files it can't find in 'sky' it will look for in 'base' - if it can't find any there it will throw a new templateException.
+
+'assign' will overwrite a template variable, and 'append' will as it suggests append to a variable.
+
+From templates there are multiple retrievel methods:
+
+'e' simply echos a template variable.
+'s' does a special chars with ENT_QUOTES then echos it - no charset support yet, coming shortly, but I always use UTF-8 anyway and you should too :)
+'g' will fetch the content of the template variable for you do do whatever you want with it. For example inside a template:
+
+<div><?php echo nl2br(self::g("foo")); ?></div>
+
+The two display functions are quite simple, 'display' and 'fetch' do precisely what they say: they echo the parsed template and return it, respectively.
+
+
+Examples:
+
+hello-world - just a quick and dirty example of use.
