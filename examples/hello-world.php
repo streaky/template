@@ -5,12 +5,14 @@ require_once("../template.php");
 // Not using __DIR__ for < PHP 5.3 in examples.
 $path = realpath(dirname(__FILE__));
 
+use github\streaky\template\template as tpl;
+
 // Add the template directory to the search path
-template::addPath("{$path}/templates/hello-world/");
+tpl::addPath("{$path}/templates/hello-world/");
 
 // Assign some template vars
-template::assign("page-title", "'hello-world' Example");
-template::assign("whom", "World");
+tpl::assign("page-title", "'hello-world' Example");
+tpl::assign("whom", "World");
 
 // Display the template
-template::display("page-outer.php");
+tpl::display("page-outer.php");
