@@ -6,9 +6,9 @@ class templateException extends \Exception {}
 
 class template {
 
-	private static $assigned = array();
+	protected static $assigned = array();
 
-	private static $paths = array();
+	protected static $paths = array();
 
 	public static function addPath($path) {
 		self::$paths[] = $path;
@@ -102,7 +102,7 @@ class template {
 
 	public static function g($name) {
 		// check if name is set
-		if(self::$assigned($name)) {
+		if(isset(self::$assigned[$name])) {
 			// it's set, so output the variable
 			return self::$assigned[$name];
 		}
