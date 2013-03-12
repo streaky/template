@@ -44,7 +44,6 @@ class template {
 
 		if($template_file != true) {
 			// template couldn't be found in the paths list - return false
-			$paths = implode(", ", array_reverse(self::$paths));
 			throw new templateException("Template Not Found in search");
 		}
 
