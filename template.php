@@ -9,6 +9,8 @@ class template {
 	protected static $assigned = array();
 
 	protected static $paths = array();
+	
+	protected static $widgets = array(); 
 
 	public static function addPath($path) {
 		self::$paths[] = $path;
@@ -77,6 +79,25 @@ class template {
 		return ob_get_clean();
 	}
 
+	public static function registerWidget($root, $class) {
+		
+		if(class_exists($class) && isset($class::$widgets) && is_array($class::$widgets)) {
+			foreach($class::$widgets as $id => $call) {
+				self::$widgets["{$root}.{$id}"] = "{$class}::{$call}";
+			}
+			return true;
+		}
+		
+		throw new templateException("Invalid widget handler");
+	}
+	
+	private static function widget($name, $params = array()) {
+		if(isset(self::$widgets[$name])) {
+			return call_user_func_array(self::$widgets[$name], $params);
+		}
+		throw new templateException("Unregistered widget called");
+	}
+	
 	public static function e($name) {
 		// check if name is set
 		if(isset(self::$assigned[$name])) {
