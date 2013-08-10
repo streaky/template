@@ -1,6 +1,6 @@
 <?php
 
-class template_test_rig extends \github\streaky\template\template {
+class template_test_rig extends \streaky\template\template {
 	public static function getPaths() {
 		return self::$paths;
 	}

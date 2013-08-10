@@ -1,6 +1,6 @@
 <?php
 
-namespace github\streaky\template;
+namespace streaky\template;
 
 class templateException extends \Exception {}
 
