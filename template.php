@@ -40,9 +40,9 @@ class template {
 		return false;
 	}
 
-	public static function display($template) {
+	public static function display($template, $abs_safe = false) {
 		// loop through the set paths LIFO
-		$template_file = self::find_template($template);
+		$template_file = self::find_template($template, $abs_safe);
 
 		if($template_file != true) {
 			// template couldn't be found in the paths list - return false
@@ -57,7 +57,12 @@ class template {
 		return true;
 	}
 
-	private static function find_template($template) {
+	/**
+	 * @param string $template Template path
+	 * @param bool $abs_safe If true relative and absolute filesystem path will be checked - potentially extremely dangerous, DO NOT allow near user input
+	 * @return string|boolean String file path if found or false
+	 */
+	private static function find_template($template, $abs_safe = false) {
 		// reverse the set paths list
 		$paths = array_reverse(self::$paths);
 		// Run through paths list, LIFO
@@ -70,12 +75,17 @@ class template {
 				return $test;
 			}
 		}
+		
+		if($abs_safe === true && file_exists($template)) {
+			return $template;
+		}
+		
 		return false;
 	}
 
-	public static function fetch($template) {
+	public static function fetch($template, $abs_safe = false) {
 		ob_start();
-		self::display($template);
+		self::display($template, $abs_safe);
 		return ob_get_clean();
 	}
 
