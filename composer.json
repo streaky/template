@@ -1,0 +1,22 @@
+{
+  "name": "streaky/template",
+  "type": "library",
+  "description": "Very lightweight template engine",
+  "homepage": "https://github.com/streaky/template/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Streaky",
+      "email": "streaky@mybrokenlogic.com",
+      "homepage": "https://github.com/streaky/"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "streaky\\template\\": "src/"
+    }
+  }
+}
