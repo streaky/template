@@ -2,9 +2,9 @@
 
 namespace streaky\template;
 
-class templateException extends \Exception {}
+class tplException extends \Exception {}
 
-class template {
+class tpl {
 
 	protected static $assigned = array();
 
@@ -46,7 +46,7 @@ class template {
 
 		if($template_file != true) {
 			// template couldn't be found in the paths list - return false
-			throw new templateException("Template Not Found in search");
+			throw new tplException("Template Not Found in search");
 		}
 
 		//debug toy.
@@ -98,14 +98,14 @@ class template {
 			return true;
 		}
 		
-		throw new templateException("Invalid widget handler");
+		throw new tplException("Invalid widget handler");
 	}
 	
 	private static function widget($name, $params = array()) {
 		if(isset(self::$widgets[$name])) {
 			return call_user_func_array(self::$widgets[$name], $params);
 		}
-		throw new templateException("Unregistered widget called");
+		throw new tplException("Unregistered widget called");
 	}
 	
 	public static function e($name) {
