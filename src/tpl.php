@@ -46,7 +46,7 @@ class tpl {
 
 		if($template_file != true) {
 			// template couldn't be found in the paths list - return false
-			throw new tplException("Template Not Found in search");
+			throw new tplException("Template '{$template}' not found in search");
 		}
 
 		//debug toy.
